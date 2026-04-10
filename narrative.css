@@ -1025,6 +1025,415 @@ footer p {
   }
 }
 
+/* ============================================
+   WHY THIS MATTERS — per-step relevance bridge
+   ============================================ */
+
+.why-matters {
+  font-family: var(--font-sans);
+  font-size: 0.8rem !important;
+  color: var(--text-dim) !important;
+  background: rgba(240, 165, 0, 0.05);
+  border-left: 2px solid rgba(240, 165, 0, 0.25);
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem !important;
+  line-height: 1.55;
+}
+
+.why-matters strong {
+  color: var(--gold) !important;
+  font-weight: 600;
+}
+
+/* ============================================
+   SOURCE DOC-TYPE BADGES
+   ============================================ */
+
+.source-doc-type {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  margin-right: 0.25rem;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+/* ============================================
+   TIMELINE ANCHORS
+   ============================================ */
+
+.timeline-anchor {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-anchor strong {
+  color: var(--text-dim) !important;
+  font-weight: 600;
+}
+
+/* ============================================
+   REVIEW DISCLOSURE
+   ============================================ */
+
+.review-note {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.review-note strong {
+  color: var(--text-dim) !important;
+}
+
+/* ============================================
+   PLAYBOOK CALLOUTS — Label each story step
+   with its position in the 5-step cycle
+   ============================================ */
+
+.playbook-callout {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid rgba(240, 165, 0, 0.2);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.playbook-bridge {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  line-height: 1.7;
+}
+
+/* ============================================
+   EXECUTIVE SUMMARY — The complete answer up top
+   ============================================ */
+
+.exec-summary {
+  padding: 5rem 2rem 6rem;
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.exec-summary-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.exec-summary-toggle {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.exec-summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.exec-summary h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--text-bright);
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.exec-summary-sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  margin-bottom: 3rem;
+}
+
+.exec-block {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.exec-block:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.exec-block-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.exec-block h3 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-bright);
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.exec-block p {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.exec-block p:last-child {
+  margin-bottom: 0;
+}
+
+.exec-block strong {
+  color: var(--text-bright);
+}
+
+.exec-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.exec-name-tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.exec-chain {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: rgba(240, 165, 0, 0.05);
+  border: 1px solid rgba(240, 165, 0, 0.15);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 0.75rem;
+  line-height: 1.8;
+}
+
+.exec-chain strong {
+  color: var(--gold) !important;
+  font-weight: 700;
+}
+
+.exec-impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.exec-impact-item {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  line-height: 1.45;
+}
+
+.exec-impact-item strong {
+  color: var(--text) !important;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.exec-continue {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.exec-continue p {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.exec-continue a {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(240, 165, 0, 0.3);
+  padding-bottom: 1px;
+  transition: all 150ms ease;
+}
+
+.exec-continue a:hover {
+  color: var(--text-bright);
+  border-bottom-color: var(--text-bright);
+}
+
+@media (max-width: 600px) {
+  .exec-impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exec-summary {
+    padding: 3.5rem 1.25rem 4rem;
+  }
+}
+
+/* ============================================
+   SCAFFOLDING — For tired / low-context readers
+   TL;DR boxes, term definitions, key insights
+   ============================================ */
+
+/* TL;DR box — section summary a skimmer can grab */
+.tldr-box {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-bright);
+  background: rgba(240, 165, 0, 0.07);
+  border: 1px solid rgba(240, 165, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.tldr-box strong {
+  color: var(--gold) !important;
+}
+
+.tldr-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+/* Inline term definition — explains jargon */
+.term-define {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: rgba(88, 166, 255, 0.06);
+  border-left: 2px solid rgba(88, 166, 255, 0.25);
+  padding: 0.4rem 0.7rem;
+  margin: 0.4rem 0 0.75rem;
+  line-height: 1.5;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Key insight — bold takeaway line skimmers will catch */
+.key-insight {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  background: rgba(63, 185, 80, 0.08);
+  border-left: 3px solid var(--green);
+  padding: 0.6rem 0.85rem;
+  margin: 0.75rem 0;
+  line-height: 1.55;
+  border-radius: 0 6px 6px 0;
+}
+
+/* "In plain English" inline callout */
+.plain-english {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  margin: 0.5rem 0 0.75rem;
+  line-height: 1.55;
+}
+
+.plain-english::before {
+  content: 'In plain English: ';
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+/* Running recap — "so far we know" between cards */
+.recap-box {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-bright);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.6;
+}
+
+.recap-box strong {
+  color: var(--text) !important;
+}
+
+.recap-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
 /* Print */
 @media print {
   body { background: white; color: #111; }
