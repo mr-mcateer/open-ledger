@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow the Money — Power Networks</title>
+  <meta name="description" content="Trace the money trail from Iranian intelligence funds through Wall Street to the founding of the world's largest private equity firm. Every step is sourced.">
+  <meta property="og:title" content="Follow the Money — Power Networks">
+  <meta property="og:description" content="Iranian intelligence funds, a junk bond empire, a dead spy's shell companies, and a burned French bank. Follow the money.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="narrative.css">
+  <style>
+    /* ============================================
+       THREAD PAGE — Timeline Scrollytelling
+       ============================================ */
+
+    .thread-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .thread-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(63, 185, 80, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .thread-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .thread-hero-icon {
+      font-size: 3rem;
+      color: var(--green);
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-kicker {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .thread-hero-path {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── TIMELINE ── */
+
+    .timeline-section {
+      padding: 2rem 2rem 6rem;
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 38px;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border-bright) 3%,
+        var(--border-bright) 97%,
+        transparent 100%
+      );
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 80px;
+      padding-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .timeline-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-step:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: 24px;
+      top: 0.3rem;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      z-index: 2;
+      transition: all 500ms ease;
+    }
+
+    .timeline-step.visible .timeline-marker {
+      border-color: var(--green);
+      color: var(--green);
+      box-shadow: 0 0 12px rgba(63, 185, 80, 0.15);
+    }
+
+    .timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 500ms ease, box-shadow 500ms ease;
+    }
+
+    .timeline-step.visible .timeline-card {
+      border-color: var(--border-bright);
+    }
+
+    .timeline-card h2 {
+      font-family: var(--font-sans);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-card p {
+      font-size: 0.93rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+    }
+
+    .timeline-card p:last-of-type {
+      margin-bottom: 1.25rem;
+    }
+
+    .timeline-card .evidence-tag {
+      margin-top: 0.5rem;
+    }
+
+    /* Final step — chain summary */
+    .timeline-step-chain .timeline-marker {
+      border-color: var(--gold) !important;
+      color: var(--gold) !important;
+      box-shadow: 0 0 16px rgba(240, 165, 0, 0.2) !important;
+    }
+
+    .timeline-step-chain .timeline-card {
+      border-color: var(--gold);
+      background: var(--bg-card-active);
+    }
+
+    .chain-flow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      line-height: 2;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    .chain-flow span {
+      color: var(--text-muted);
+    }
+
+    /* ── SOURCES ── */
+
+    .sources-section {
+      padding: 4rem 2rem;
+      background: var(--bg-surface);
+    }
+
+    .sources-container {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    .sources-section h2 {
+      font-family: var(--font-sans);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 1.5rem;
+    }
+
+    .sources-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sources-list li {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    .source-type {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-right: 0.5rem;
+    }
+
+    /* ── CONTINUE EXPLORING ── */
+
+    .continue-section {
+      padding: 6rem 2rem;
+    }
+
+    .continue-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .continue-container h2 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-container > p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+    }
+
+    .continue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .continue-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 300ms ease;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .continue-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    .continue-card.thread-lawyer::before { background: var(--gold); }
+    .continue-card.thread-spy::before { background: var(--red); }
+    .continue-card.thread-institution::before { background: var(--blue); }
+
+    .continue-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .continue-card:hover::before { opacity: 1; }
+
+    .continue-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.5;
+    }
+
+    .continue-card.thread-lawyer .continue-icon { color: var(--gold); }
+    .continue-card.thread-spy .continue-icon { color: var(--red); }
+    .continue-card.thread-institution .continue-icon { color: var(--blue); }
+
+    .continue-card h3 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-card p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .continue-arrow {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      transition: all 200ms ease;
+    }
+
+    .continue-card:hover .continue-arrow {
+      color: var(--text-bright);
+      transform: translateX(4px);
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 900px) {
+      .continue-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .timeline-section::before {
+        left: 22px;
+      }
+
+      .timeline-step {
+        padding-left: 54px;
+        padding-bottom: 2.5rem;
+      }
+
+      .timeline-marker {
+        left: 8px;
+        width: 26px;
+        height: 26px;
+        font-size: 0.6rem;
+      }
+
+      .timeline-card {
+        padding: 1.25rem;
+      }
+
+      .timeline-card h2 {
+        font-size: 1.05rem;
+      }
+
+      .timeline-card p {
+        font-size: 0.87rem;
+      }
+
+      .thread-hero {
+        min-height: 70vh;
+        padding: 5rem 1.25rem 3rem;
+      }
+
+      .continue-section {
+        padding: 4rem 1.25rem;
+      }
+
+      .sources-section {
+        padding: 3rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- MINIMAL NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">POWER<span>NETWORKS</span></a>
+    <div class="nav-right">
+      <a href="index.html#threads" class="nav-link">All Threads</a>
+      <a href="dossier.html" class="nav-link nav-dossier">Full Dossier</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+
+  <section class="thread-hero">
+    <div class="thread-hero-content">
+      <div class="thread-hero-icon">$</div>
+      <p class="thread-hero-kicker">Thread 01 &mdash; Follow the Money</p>
+      <h1>The Money Trail</h1>
+      <p class="thread-hero-path">Iranian intelligence funds &rarr; Ivan Boesky &rarr; L.F. Rothschild &rarr; Drexel Burnham Lambert &rarr; Cr&eacute;dit Lyonnais &rarr; Robert Maxwell &rarr; Apollo Global &rarr; Epstein</p>
+      <p class="thread-hero-sub">How did a French bank connected to a dead spy's 600 shell companies provide the founding capital for the world's largest private equity firm? Follow the money.</p>
+      <div class="scroll-prompt">
+        <span>Scroll to begin</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TIMELINE STEPS
+       ============================================ -->
+
+  <section class="timeline-section" id="timeline">
+
+    <!-- STEP 1 -->
+    <div class="timeline-step" data-step="1">
+      <div class="timeline-marker">1</div>
+      <div class="timeline-card">
+        <h2>The Banker from Iran</h2>
+        <p>In the early 1960s, Ivan Boesky lived in Iran, where he developed a close friendship with an Iranian national whose family had significant connections. He returned to the United States with wealth that had no clear origin story -- no family fortune, no prior business success, no inheritance on the record.</p>
+        <p>Despite lacking an undergraduate degree, Boesky secured a position at <strong>L.F. Rothschild</strong> in New York, one of the city's established brokerage firms. In an industry that screened obsessively for pedigree, someone had vouched for him. Within years, he would become one of the most aggressive arbitrageurs on Wall Street.</p>
+        <div class="evidence-tag reported">REPORTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="timeline-step" data-step="2">
+      <div class="timeline-marker">2</div>
+      <div class="timeline-card">
+        <h2>The Daily Calls</h2>
+        <p>Every trading day, Ivan Boesky spoke by phone with <strong>Michael Milken</strong> at Drexel Burnham Lambert. The calls were not casual. Boesky served as a conduit -- funneling money of questionable provenance into Milken's network of investors and deal pools.</p>
+        <p>Boesky maintained an office in the <strong>Pahlavi Foundation building</strong> in New York, a property controlled by the Iranian government. The building was a known hub for Iranian state-linked financial operations during and after the Shah's reign. A Wall Street arbitrageur, working out of an Iranian government building, speaking daily to the architect of the junk bond market.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="timeline-step" data-step="3">
+      <div class="timeline-marker">3</div>
+      <div class="timeline-card">
+        <h2>The Junk Bond Machine</h2>
+        <p>At <strong>Drexel Burnham Lambert</strong>, Michael Milken effectively invented the high-yield debt market. His operation in Beverly Hills became the most powerful capital-raising engine in American finance -- funding leveraged buyouts, hostile takeovers, and corporate raids that reshaped the Fortune 500.</p>
+        <p>Working under Milken was <strong>Leon Black</strong>. Black's specific contribution was the invention of the <strong>"highly confident letter"</strong> -- a promissory note from Drexel's network of billionaire investors that signaled enough capital existed to complete a hostile takeover. It was a financial weapon: a piece of paper that could move billions.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="timeline-step" data-step="4">
+      <div class="timeline-marker">4</div>
+      <div class="timeline-card">
+        <h2>The Collapse</h2>
+        <p>In 1988, Rudy Giuliani -- then U.S. Attorney for the Southern District of New York -- prosecuted Michael Milken, deploying racketeering statutes that had never been used against a financier. Drexel Burnham Lambert collapsed between 1989 and 1990, and its massive portfolio of junk bonds and distressed assets was liquidated at fire-sale prices, marked as near-worthless on paper.</p>
+        <p>But Leon Black had spent years inside the machine. He knew which assets Drexel was dumping were actually valuable -- which bonds would recover, which companies would survive. The market saw wreckage. Black saw a shopping list.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="timeline-step" data-step="5">
+      <div class="timeline-marker">5</div>
+      <div class="timeline-card">
+        <h2>The Phone Call</h2>
+        <p>In 1990, as Drexel's ashes were still smoldering, Leon Black received a call from <strong>Cr&eacute;dit Lyonnais</strong>, a French state-owned bank. The bank offered him $4 billion to start a new fund that would buy distressed debt -- the very assets Black knew best.</p>
+        <p>Black flew to Paris. He did not accept the offer. He told them the number was wrong: <strong>"You have to give me $8 billion."</strong> Cr&eacute;dit Lyonnais agreed. <strong>Apollo Global Management</strong> was born, seeded almost entirely by a single French bank with deep ties to intelligence operations across Europe and the Middle East.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="timeline-step" data-step="6">
+      <div class="timeline-marker">6</div>
+      <div class="timeline-card">
+        <h2>The 600 Shell Companies</h2>
+        <p><strong>Robert Maxwell</strong> -- Ghislaine Maxwell's father -- had built an empire of approximately 600 shell companies. Their primary function: holding KGB and Soviet money offshore as the USSR collapsed. Billions needed to be laundered, parked, and repositioned before the old system dissolved entirely.</p>
+        <p>Cr&eacute;dit Lyonnais was a primary vehicle for these operations. Maxwell and the bank were deeply intertwined through shared accounts, loans, and opaque corporate structures. Maxwell died under mysterious circumstances in November 1991, falling from his yacht in the Atlantic.</p>
+        <p>Jeffrey Epstein's personal wealth, by multiple accounts, <strong>exploded starting in February 1992</strong> -- three months after Maxwell's death. The timing raises an unavoidable question about the origin of those funds.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="timeline-step" data-step="7">
+      <div class="timeline-marker">7</div>
+      <div class="timeline-card">
+        <h2>The Fire</h2>
+        <p>In May 1996, the headquarters of <strong>Cr&eacute;dit Lyonnais</strong> on Boulevard des Italiens in Paris burned to the ground. The fire was catastrophic and targeted: it started in the computer room that housed the bank's central records.</p>
+        <p>French investigators had been closing in on the bank's losses and the network of questionable transactions flowing through its books. After the fire, approximately <strong>$20 billion in funds could never be accounted for</strong>. The records that could have traced the flow of money from Maxwell's shell companies through Apollo and beyond were destroyed.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; French investigation records</div>
+      </div>
+    </div>
+
+    <!-- STEP 8 -->
+    <div class="timeline-step" data-step="8">
+      <div class="timeline-marker">8</div>
+      <div class="timeline-card">
+        <h2>The $170 Million</h2>
+        <p>Jeffrey Epstein had targeted <strong>Leon Black</strong> since the 1980s, cultivating a relationship that deepened over decades. Eventually, Black paid Epstein approximately <strong>$170 million over five years</strong>, ostensibly for "estate planning" and "tax advice." No financial advisor in history has commanded fees on that scale for such services.</p>
+        <p>In January 2026, DOJ file releases revealed a further dimension: Epstein held <strong>power of attorney</strong> to trade on Leon Black's behalf through Deutsche Bank accounts. Epstein did not merely advise Black. He had legal authority to move Black's money.</p>
+        <div class="evidence-tag documented">DOCUMENTED</div>
+      </div>
+    </div>
+
+    <!-- STEP 9 — THE CHAIN -->
+    <div class="timeline-step timeline-step-chain" data-step="9">
+      <div class="timeline-marker">&infin;</div>
+      <div class="timeline-card">
+        <h2>The Chain</h2>
+        <p>Laid end to end, the documented record traces a single financial pipeline across four decades, three continents, and the founding of what became the world's largest alternative asset manager.</p>
+        <p>The founding capital of Apollo Global Management does not trace to clean institutional money. It traces through a burned French bank, a dead spy's network of shell companies, and a capital pipeline that begins in intelligence-adjacent finance of the 1960s.</p>
+        <div class="chain-flow">
+          Iranian/intelligence money <span>&rarr;</span> Boesky <span>&rarr;</span> L.F. Rothschild credentials <span>&rarr;</span> Milken/Drexel <span>&rarr;</span> Leon Black <span>&rarr;</span> Cr&eacute;dit Lyonnais <span>(</span>Maxwell's bank<span>)</span> <span>&rarr;</span> Apollo Global <span>&rarr;</span> Epstein
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       SOURCES
+       ============================================ -->
+
+  <section class="sources-section">
+    <div class="sources-container">
+      <h2>Sources</h2>
+      <ul class="sources-list">
+        <li><span class="source-type">DOJ</span> Epstein file releases (December 2025, January 2026)</li>
+        <li><span class="source-type">RECORDS</span> Drexel Burnham Lambert corporate records and SEC enforcement files</li>
+        <li><span class="source-type">GOV</span> French government investigation records, Cr&eacute;dit Lyonnais inquiry</li>
+        <li><span class="source-type">BOOK</span> Connie Bruck, <em>The Predator's Ball</em> (1988) -- Drexel, Milken, and the junk bond era</li>
+        <li><span class="source-type">INV</span> Henry Abbott / TrueHoop investigation series</li>
+        <li><span class="source-type">DOJ</span> Deutsche Bank settlement records and compliance filings</li>
+        <li><span class="source-type">SEC</span> Apollo Global Management public filings and board disclosures</li>
+        <li><span class="source-type">RECORDS</span> Pahlavi Foundation property records, New York</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTINUE EXPLORING
+       ============================================ -->
+
+  <section class="continue-section">
+    <div class="continue-container">
+      <h2>Continue exploring</h2>
+      <p>Same network, different entry point. Follow another thread through the evidence.</p>
+
+      <div class="continue-grid">
+
+        <a href="thread-lawyer.html" class="continue-card thread-lawyer">
+          <div class="continue-icon">&sect;</div>
+          <h3>Follow the Lawyer</h3>
+          <p>Sullivan & Cromwell, the Dulles brothers, and 130 years of placing the right people in the right offices.</p>
+          <div class="continue-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-spy.html" class="continue-card thread-spy">
+          <div class="continue-icon">&#9670;</div>
+          <h3>Follow the Spy</h3>
+          <p>The banker who took Microsoft public became the CIA's #3 -- then joined Apollo's board.</p>
+          <div class="continue-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-institution.html" class="continue-card thread-institution">
+          <div class="continue-icon">&#9960;</div>
+          <h3>Follow the Institution</h3>
+          <p>How private foundations produce government personnel -- and what happens when the same families fund both.</p>
+          <div class="continue-arrow">&rarr;</div>
+        </a>
+
+      </div>
+
+      <div class="threads-footer">
+        <a href="dossier.html" class="dossier-link">
+          <span class="dossier-label">Full Dossier</span>
+          <span class="dossier-desc">The complete evidence database -- every person, every connection, every source.</span>
+          <span class="thread-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>An open-source investigative research project.</p>
+      <p class="footer-sources">Primary sources: DOJ Epstein file releases (Dec 2025, Jan 2026), Drexel Burnham Lambert records, French investigation records, Connie Bruck, Henry Abbott/TrueHoop</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Full Dossier</a>
+        <a href="index.html#threads">All Threads</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       INLINE JS — Progress bar, nav, scroll reveal
+       ============================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    // Progress bar
+    var bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // Nav scroll state
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Timeline step reveal on scroll
+    var steps = document.querySelectorAll('.timeline-step');
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.15
+    });
+
+    steps.forEach(function (step) {
+      observer.observe(step);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          var offset = 60;
+          var y = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

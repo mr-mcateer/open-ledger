@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow the Lawyer — Power Networks</title>
+  <meta name="description" content="How one law firm sat at the center of American power for 130 years. Sullivan & Cromwell to the Dulles Brothers to the CIA to Epstein to SDNY.">
+  <meta property="og:title" content="Follow the Lawyer — Power Networks">
+  <meta property="og:description" content="Sullivan & Cromwell (1890s) to Dulles Brothers to CIA to Donald Barr to Epstein to William Barr to Jay Clayton to SDNY. One firm. 130 years.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="narrative.css">
+  <style>
+    /* ============================================
+       THREAD PAGE — Vertical Timeline Layout
+       ============================================ */
+
+    .thread-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .thread-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(240, 165, 0, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .thread-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .thread-hero-icon {
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-kicker {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-inner h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .thread-hero-path {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .thread-hero .scroll-prompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    /* ── TIMELINE ── */
+
+    .timeline-section {
+      padding: 2rem 2rem 6rem;
+      position: relative;
+    }
+
+    .timeline-container {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Vertical line */
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 28px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border-bright) 5%, var(--border-bright) 95%, transparent);
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 76px;
+      padding-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .timeline-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Step number on the line */
+    .timeline-marker {
+      position: absolute;
+      left: 10px;
+      top: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--border-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 500ms ease;
+      z-index: 2;
+    }
+
+    .timeline-step.visible .timeline-marker {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 16px rgba(240, 165, 0, 0.15);
+    }
+
+    .timeline-step:last-child .timeline-marker {
+      border-color: var(--gold);
+      background: rgba(240, 165, 0, 0.1);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .timeline-step h2 {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-step p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+    }
+
+    .timeline-step .evidence-tag {
+      margin-top: 0.5rem;
+    }
+
+    /* Final step — accent */
+    .timeline-step-final {
+      padding-bottom: 2rem;
+    }
+
+    .timeline-step-final h2 {
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    .timeline-throughline {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(240, 165, 0, 0.05);
+      border: 1px solid rgba(240, 165, 0, 0.15);
+      border-radius: 10px;
+    }
+
+    .timeline-throughline p {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .timeline-throughline .throughline-sub {
+      color: var(--text-dim);
+      font-weight: 400;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    /* ── SOURCES ── */
+
+    .sources-section {
+      padding: 4rem 2rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .sources-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .sources-container h2 {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+    }
+
+    .sources-list {
+      columns: 2;
+      column-gap: 2rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .sources-list li {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      break-inside: avoid;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
+    }
+
+    /* ── CONTINUE EXPLORING ── */
+
+    .continue-section {
+      padding: 6rem 2rem;
+    }
+
+    .continue-container {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .continue-container h2 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-container > p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .continue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .continue-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 300ms ease;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .continue-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    .continue-card-money::before { background: var(--green); }
+    .continue-card-spy::before { background: var(--red); }
+    .continue-card-institution::before { background: var(--blue); }
+
+    .continue-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .continue-card:hover::before { opacity: 1; }
+
+    .continue-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .continue-card-money .continue-card-icon { color: var(--green); }
+    .continue-card-spy .continue-card-icon { color: var(--red); }
+    .continue-card-institution .continue-card-icon { color: var(--blue); }
+
+    .continue-card h3 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-card p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .continue-card-arrow {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      transition: all 200ms ease;
+    }
+
+    .continue-card:hover .continue-card-arrow {
+      color: var(--text-bright);
+      transform: translateX(4px);
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 768px) {
+      .continue-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sources-list {
+        columns: 1;
+      }
+
+      .timeline-step {
+        padding-left: 64px;
+        padding-bottom: 3rem;
+      }
+
+      .timeline-container::before {
+        left: 22px;
+      }
+
+      .timeline-marker {
+        left: 4px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .thread-hero {
+        min-height: 70vh;
+        padding: 5rem 1.25rem 3rem;
+      }
+
+      .timeline-section {
+        padding: 1rem 1.25rem 4rem;
+      }
+
+      .timeline-step {
+        padding-left: 56px;
+        padding-bottom: 2.5rem;
+      }
+
+      .timeline-container::before {
+        left: 18px;
+      }
+
+      .timeline-marker {
+        left: 0;
+        width: 36px;
+        height: 36px;
+        font-size: 0.65rem;
+      }
+
+      .timeline-step h2 {
+        font-size: 1.1rem;
+      }
+
+      .timeline-step p {
+        font-size: 0.88rem;
+      }
+
+      .continue-section, .sources-section {
+        padding: 4rem 1.25rem;
+      }
+    }
+
+    /* Print */
+    @media print {
+      .thread-hero { min-height: auto; padding: 2rem; }
+      .timeline-step { opacity: 1 !important; transform: none !important; }
+      .timeline-marker { border-color: #999; color: #333; box-shadow: none; }
+      .sources-section { background: white; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- MINIMAL NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">POWER<span>NETWORKS</span></a>
+    <div class="nav-right">
+      <a href="index.html#threads" class="nav-link">All Threads</a>
+      <a href="dossier.html" class="nav-link nav-dossier">Full Dossier</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+
+  <section class="thread-hero">
+    <div class="thread-hero-inner">
+      <div class="thread-hero-icon">&sect;</div>
+      <p class="thread-hero-kicker">Power Networks Investigation</p>
+      <h1>Follow the Lawyer</h1>
+      <p class="thread-hero-path">Sullivan & Cromwell (1890s) &rarr; Dulles Brothers &rarr; CIA &rarr; Donald Barr &rarr; Epstein &rarr; William Barr &rarr; Jay Clayton &rarr; SDNY</p>
+      <p class="thread-hero-sub">One law firm. 130 years at the center of American power. Every claim sourced. Follow the thread.</p>
+      <div class="scroll-prompt">
+        <span>Scroll to begin</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TIMELINE
+       ============================================ -->
+
+  <section class="timeline-section">
+    <div class="timeline-container">
+
+      <!-- STEP 1 -->
+      <div class="timeline-step" data-step="1">
+        <div class="timeline-marker">01</div>
+        <span class="timeline-date">1890s</span>
+        <h2>The Firm</h2>
+        <p>Sullivan & Cromwell is founded. It represents the Rockefellers and America's wealthiest industrialists. It will remain at the center of American power for the next 130 years.</p>
+        <p>Not a boutique. Not a specialty shop. A permanent institution at the junction of Wall Street, Washington, and the intelligence community. It is the firm that other firms measure themselves against.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; Sullivan & Cromwell firm records</div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="timeline-step" data-step="2">
+        <div class="timeline-marker">02</div>
+        <span class="timeline-date">1919 &ndash; 1953</span>
+        <h2>The Brothers</h2>
+        <p>Allen Dulles and John Foster Dulles are both partners at Sullivan & Cromwell. Allen negotiates the Treaty of Versailles. During WWII, he is stationed in Bern as America's liaison to the Bank for International Settlements.</p>
+        <p>In 1953, Allen founds and directs the CIA. John Foster becomes Secretary of State. Wall Street law, intelligence, and foreign policy converge in two brothers from one firm.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; State Department records; David Talbot, <em>The Devil's Chessboard</em></div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="timeline-step" data-step="3">
+        <div class="timeline-marker">03</div>
+        <span class="timeline-date">1973</span>
+        <h2>The Teacher</h2>
+        <p>Donald Barr, former OSS (CIA predecessor) member, is headmaster of the Dalton School. He hires a young, unqualified Jeffrey Epstein to teach there.</p>
+        <p>Barr's son William will later become Attorney General of the United States.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; Dalton School records; DOJ appointment records</div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="timeline-step" data-step="4">
+        <div class="timeline-marker">04</div>
+        <span class="timeline-date">2017</span>
+        <h2>The Regulator</h2>
+        <p>Jay Clayton, a Sullivan & Cromwell partner whose clients include Goldman Sachs, Deutsche Bank, and Barclays, is appointed SEC Chairman. He is now the top regulator overseeing his former clients.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; SEC disclosure filings; presidential appointment records</div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="timeline-step" data-step="5">
+        <div class="timeline-marker">05</div>
+        <span class="timeline-date">2020</span>
+        <h2>The Standoff</h2>
+        <p>Attorney General William Barr &mdash; Donald Barr's son &mdash; tries to install Jay Clayton as head of SDNY, replacing Jeffrey Berman, the prosecutor who arrested Epstein.</p>
+        <p>Berman refuses to resign. Barr releases a press statement claiming he did. Berman holds a press conference saying he did not.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; Jeffrey Berman, NPR Fresh Air interview; DOJ correspondence</div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="timeline-step" data-step="6">
+        <div class="timeline-marker">06</div>
+        <span class="timeline-date">2021</span>
+        <h2>The Board Seat</h2>
+        <p>Clayton leaves the SEC, returns briefly to Sullivan & Cromwell, then becomes Chairman of the Board of Apollo Global Management for $500K/year.</p>
+        <p>Apollo's founder Leon Black has just paid Epstein $170 million.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; Apollo Global SEC filings; board disclosures</div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="timeline-step" data-step="7">
+        <div class="timeline-marker">07</div>
+        <span class="timeline-date">2025</span>
+        <h2>The Prosecutor</h2>
+        <p>Jay Clayton &mdash; who has never been a prosecutor &mdash; is appointed to run the Southern District of New York. He now controls the office holding the Epstein case files that implicate Apollo's founder, the man who just paid him $500K/year.</p>
+        <div class="evidence-tag documented">DOCUMENTED &mdash; DOJ appointment; Apollo filings; DOJ Epstein file releases</div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="timeline-step timeline-step-final" data-step="8">
+        <div class="timeline-marker">08</div>
+        <span class="timeline-date">1890s &ndash; 2025</span>
+        <h2>130 Years</h2>
+        <p>The through-line is a single institution threading American power across three centuries.</p>
+        <div class="timeline-throughline">
+          <p>Sullivan & Cromwell (1890s) &rarr; represented Rockefellers &rarr; Dulles brothers &rarr; CIA &rarr; Donald Barr (OSS) hired Epstein &rarr; Jay Clayton (S&C) &rarr; SEC &rarr; Apollo board &rarr; SDNY</p>
+          <p class="throughline-sub">One law firm. 130 years. The same network.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SOURCES
+       ============================================ -->
+
+  <section class="sources-section">
+    <div class="sources-container">
+      <h2>Sources</h2>
+      <ul class="sources-list">
+        <li>Sullivan & Cromwell firm records</li>
+        <li>SEC disclosure filings</li>
+        <li>DOJ appointment records</li>
+        <li>Jeffrey Berman, NPR Fresh Air interview</li>
+        <li>Apollo Global Management SEC filings</li>
+        <li>DOJ Epstein file releases (Dec 2025, Jan 2026)</li>
+        <li>David Talbot, <em>The Devil's Chessboard</em></li>
+        <li>State Department historical records</li>
+        <li>Dalton School records</li>
+        <li>Apollo Global board disclosures</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTINUE EXPLORING
+       ============================================ -->
+
+  <section class="continue-section">
+    <div class="continue-container">
+      <h2>Continue exploring</h2>
+      <p>The lawyer is one thread. The full network has dozens. Pick another path through the evidence.</p>
+
+      <div class="continue-grid">
+
+        <a href="thread-money.html" class="continue-card continue-card-money">
+          <div class="continue-card-icon">$</div>
+          <h3>Follow the Money</h3>
+          <p>Iranian intelligence funds to Boesky to Drexel to Apollo to Epstein. Where did the money come from?</p>
+          <div class="continue-card-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-spy.html" class="continue-card continue-card-spy">
+          <div class="continue-card-icon">&#9670;</div>
+          <h3>Follow the Spy</h3>
+          <p>Alex Brown to Buzzy Krongard to CIA to Deutsche Bank to Apollo. The banker who became the spy chief.</p>
+          <div class="continue-card-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-institution.html" class="continue-card continue-card-institution">
+          <div class="continue-card-icon">&#9960;</div>
+          <h3>Follow the Institution</h3>
+          <p>Rockefeller Foundation to CFR to Trilateral Commission to Federalist Society. The personnel pipeline.</p>
+          <div class="continue-card-arrow">&rarr;</div>
+        </a>
+
+      </div>
+
+      <div class="threads-footer">
+        <a href="dossier.html" class="dossier-link">
+          <span class="dossier-label">Full Dossier</span>
+          <span class="dossier-desc">The complete evidence database. Every person, every connection, every source.</span>
+          <span class="thread-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>An open-source investigative research project.</p>
+      <p class="footer-sources">Primary sources: DOJ Epstein file releases (Dec 2025, Jan 2026), SEC filings, FOIA documents, court records, congressional testimony, ProPublica, David Talbot</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Full Dossier</a>
+        <a href="index.html#threads">All Threads</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ── PROGRESS BAR ──
+      var bar = document.getElementById('progress-bar');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      }, { passive: true });
+
+      // ── NAV SCROLL STATE ──
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      // ── TIMELINE STEP REVEAL ON SCROLL ──
+      var steps = document.querySelectorAll('.timeline-step');
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.15
+      });
+
+      steps.forEach(function (step) {
+        observer.observe(step);
+      });
+
+      // ── SMOOTH SCROLL ──
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            var y = target.getBoundingClientRect().top + window.scrollY - 60;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
