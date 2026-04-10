@@ -234,15 +234,6 @@ em { color: var(--text); }
   border-left: 3px solid var(--gold);
   border-radius: 0 12px 12px 0;
   padding: 2rem 2.25rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 500ms ease, transform 500ms ease, border-color 300ms ease, box-shadow 300ms ease;
-}
-
-.step.active .step-card,
-.step-card.visible {
-  opacity: 1;
-  transform: translateY(0);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -991,17 +982,6 @@ footer p {
   border-radius: 14px;
   padding: 2rem;
   transition: all 300ms ease;
-}
-
-.matters-card {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: all 500ms ease;
-}
-
-.matters-card.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .matters-card:hover {
