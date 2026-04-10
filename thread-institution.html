@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow the Institution — Power Networks</title>
+  <meta name="description" content="How private foundations create the personnel pipeline into government: Rockefeller Foundation to CFR to Trilateral Commission to Koch to Federalist Society to the Supreme Court.">
+  <meta property="og:title" content="Follow the Institution — Power Networks">
+  <meta property="og:description" content="Trace how private foundations produce the personnel who staff government — and what happens when the same families fund both the think tanks and the judges.">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="narrative.css">
+  <style>
+    /* ============================================
+       THREAD PAGE — Vertical Timeline Scrollytelling
+       No SVG network map, pure narrative
+       ============================================ */
+
+    .thread-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .thread-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 40%, rgba(88, 166, 255, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .thread-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .thread-kicker {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .thread-hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    .thread-path-display {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ── TIMELINE ── */
+
+    .timeline-section {
+      padding: 2rem 2rem 6rem;
+      position: relative;
+    }
+
+    .timeline {
+      max-width: 660px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 28px;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border-bright) 5%,
+        var(--border-bright) 95%,
+        transparent 100%
+      );
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 72px;
+      padding-bottom: 4rem;
+      opacity: 0.2;
+      transform: translateY(16px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .timeline-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Timeline node */
+    .timeline-node {
+      position: absolute;
+      left: 16px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--border-bright);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: all 600ms ease;
+    }
+
+    .timeline-step.visible .timeline-node {
+      border-color: var(--blue);
+      box-shadow: 0 0 12px rgba(88, 166, 255, 0.2);
+    }
+
+    .timeline-node-inner {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: background 600ms ease;
+    }
+
+    .timeline-step.visible .timeline-node-inner {
+      background: var(--blue);
+    }
+
+    .timeline-step-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .timeline-step-date {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .timeline-step h2 {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-step-body p {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+    }
+
+    .timeline-step-body p:last-of-type {
+      margin-bottom: 1.25rem;
+    }
+
+    /* Final step styling */
+    .timeline-step-final {
+      padding-bottom: 2rem;
+    }
+
+    .timeline-step-final .timeline-node {
+      border-color: var(--gold);
+    }
+
+    .timeline-step-final.visible .timeline-node {
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(240, 165, 0, 0.25);
+    }
+
+    .timeline-step-final .timeline-node-inner {
+      background: var(--gold);
+    }
+
+    .timeline-step-final .timeline-step-number {
+      color: var(--gold);
+    }
+
+    .timeline-step-final h2 {
+      font-size: 1.5rem;
+    }
+
+    .step-synthesis {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(240, 165, 0, 0.04);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .step-synthesis p {
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--gold);
+      line-height: 1.6;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── SOURCES SECTION ── */
+
+    .sources-section {
+      padding: 4rem 2rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .sources-container {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    .sources-section h2 {
+      font-family: var(--font-sans);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .source-list li {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 0.3rem 0.7rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* ── CONTINUE EXPLORING ── */
+
+    .continue-section {
+      padding: 6rem 2rem;
+    }
+
+    .continue-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .continue-section h2 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+    }
+
+    .continue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .continue-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 300ms ease;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .continue-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+
+    .continue-card-money::before { background: var(--green); }
+    .continue-card-lawyer::before { background: var(--gold); }
+    .continue-card-spy::before { background: var(--red); }
+
+    .continue-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .continue-card:hover::before { opacity: 1; }
+
+    .continue-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    .continue-card-money .continue-icon { color: var(--green); }
+    .continue-card-lawyer .continue-icon { color: var(--gold); }
+    .continue-card-spy .continue-icon { color: var(--red); }
+
+    .continue-card h3 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-card p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      flex-grow: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .continue-card .thread-meta {
+      font-size: 0.65rem;
+    }
+
+    .continue-card .thread-arrow {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .continue-dossier {
+      margin-top: 1.25rem;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 900px) {
+      .continue-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .thread-hero {
+        min-height: 70vh;
+        padding: 5rem 1.25rem 3rem;
+      }
+
+      .timeline-section {
+        padding: 1rem 1rem 4rem;
+      }
+
+      .timeline::before {
+        left: 18px;
+      }
+
+      .timeline-node {
+        left: 6px;
+        width: 22px;
+        height: 22px;
+      }
+
+      .timeline-step {
+        padding-left: 52px;
+        padding-bottom: 3rem;
+      }
+
+      .timeline-step h2 {
+        font-size: 1.1rem;
+      }
+
+      .timeline-step-body p {
+        font-size: 0.88rem;
+      }
+
+      .continue-section {
+        padding: 4rem 1.25rem;
+      }
+
+      .sources-section {
+        padding: 3rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- MINIMAL NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">POWER<span>NETWORKS</span></a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-link">&larr; Back</a>
+      <a href="dossier.html" class="nav-link nav-dossier">Full Dossier</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       THREAD HERO
+       ============================================ -->
+
+  <section class="thread-hero">
+    <div class="thread-hero-content">
+      <p class="thread-kicker">Thread 4 of 4 &mdash; Follow the Institution</p>
+      <h1>The Personnel Pipeline</h1>
+      <p class="thread-hero-sub">Private foundations don't lobby government. They produce the people who <em>become</em> the government. This is how the pipeline works &mdash; from both sides of the political spectrum.</p>
+      <p class="thread-path-display">Rockefeller Foundation &rarr; CFR &rarr; Trilateral Commission &rarr; Epstein recruitment &rarr; Koch &rarr; Federalist Society &rarr; Supreme Court</p>
+      <div class="scroll-prompt">
+        <span>Scroll to begin</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TIMELINE NARRATIVE
+       ============================================ -->
+
+  <section class="timeline-section">
+    <div class="timeline">
+
+      <!-- STEP 1 -->
+      <div class="timeline-step" data-step="0">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>01</span>
+          <span class="timeline-step-date">1913</span>
+        </div>
+        <h2>The Blueprint</h2>
+        <div class="timeline-step-body">
+          <p>John D. Rockefeller Sr. doesn't just make money &mdash; he invents the modern philanthropic foundation as a power structure. The Rockefeller Foundation channels private wealth into institutions that produce policy personnel.</p>
+          <p>This is the blueprint every dynasty will follow.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; Rockefeller Foundation records</div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="timeline-step" data-step="1">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>02</span>
+          <span class="timeline-step-date">1921</span>
+        </div>
+        <h2>The Pipeline</h2>
+        <div class="timeline-step-body">
+          <p>The Council on Foreign Relations is established with Rockefeller backing. Over the next century, most U.S. Secretaries of State and Defense will be CFR members.</p>
+          <p>The foundation doesn't lobby government &mdash; it produces the people who <strong>become</strong> the government.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; CFR membership records</div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="timeline-step" data-step="2">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>03</span>
+          <span class="timeline-step-date">1973</span>
+        </div>
+        <h2>The Commission</h2>
+        <div class="timeline-step-body">
+          <p>David Rockefeller founds the Trilateral Commission, connecting American, European, and Japanese business elites.</p>
+          <p>His philosophy, as recounted by Epstein: elected politicians are temporary; businessmen provide continuity; therefore businessmen should coordinate policy across national borders.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; Epstein-Bannon interview transcript</div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="timeline-step" data-step="3">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>04</span>
+          <span class="timeline-step-date">~2000</span>
+        </div>
+        <h2>The Recruit</h2>
+        <div class="timeline-step-body">
+          <p>David Rockefeller personally recruits Jeffrey Epstein into the Trilateral Commission and appoints him to the board of Rockefeller University. Epstein appears in Rockefeller's contact book with 4 phone numbers.</p>
+          <p>These memberships give Epstein institutional legitimacy to access scientific, financial, and political elites.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; DOJ Epstein file releases</div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="timeline-step" data-step="4">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>05</span>
+          <span class="timeline-step-date">1985&ndash;2014</span>
+        </div>
+        <h2>The Other Pipeline</h2>
+        <div class="timeline-step-body">
+          <p>On the other side of the political spectrum, Charles Koch builds a parallel infrastructure. Through DonorsTrust and Donors Capital Fund, the Koch network funnels <strong>$20M+</strong> to the Federalist Society over 30 years.</p>
+          <p>Koch's total political/charitable spending hits <strong>$656.8M</strong> in 2021 alone across 27 organizations.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; OpenSecrets, Koch foundation tax filings (990 forms)</div>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="timeline-step" data-step="5">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>06</span>
+        </div>
+        <h2>The Judges</h2>
+        <div class="timeline-step-body">
+          <p>Leonard Leo, Federalist Society Executive VP, becomes the conduit between Koch money and the federal judiciary. He personally vetted <strong>Neil Gorsuch</strong>, <strong>Brett Kavanaugh</strong>, and <strong>Amy Coney Barrett</strong>.</p>
+          <p>His network directed <strong>$50.7M</strong> to Project 2025 advisory board organizations.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; ProPublica</div>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="timeline-step" data-step="6">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>07</span>
+        </div>
+        <h2>The Secret Summits</h2>
+        <div class="timeline-step-body">
+          <p>ProPublica reveals Supreme Court Justice Clarence Thomas secretly attended Koch donor summits arranged by Leonard Leo. Thomas's financial disclosures did not include these trips.</p>
+          <p>At George Mason University, court-ordered FOIA releases reveal Koch and Leo directly influenced faculty hiring and student admissions.</p>
+          <div class="evidence-tag documented">DOCUMENTED &mdash; ProPublica, court-ordered FOIA releases</div>
+        </div>
+      </div>
+
+      <!-- STEP 8 (FINAL) -->
+      <div class="timeline-step timeline-step-final" data-step="7">
+        <div class="timeline-node"><div class="timeline-node-inner"></div></div>
+        <div class="timeline-step-number">
+          <span>08</span>
+        </div>
+        <h2>Two Pipelines, One System</h2>
+        <div class="timeline-step-body">
+          <p>The Rockefellers built the CFR pipeline (foreign policy establishment). The Kochs built the Federalist Society pipeline (judicial appointments).</p>
+          <p>Different families, different politics, same strategy: fund the institution that produces the personnel who run the government.</p>
+          <div class="step-synthesis">
+            <p>The system doesn't need a conspiracy. It just needs infrastructure.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       SOURCES
+       ============================================ -->
+
+  <section class="sources-section">
+    <div class="sources-container">
+      <h2>Sources</h2>
+      <ul class="source-list">
+        <li>Rockefeller Foundation records</li>
+        <li>CFR membership records</li>
+        <li>DOJ Epstein file releases</li>
+        <li>OpenSecrets</li>
+        <li>ProPublica investigations</li>
+        <li>Koch foundation tax filings (990 forms)</li>
+        <li>Court-ordered FOIA releases (George Mason University)</li>
+        <li>Jane Mayer, <em>Dark Money</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTINUE EXPLORING
+       ============================================ -->
+
+  <section class="continue-section">
+    <div class="continue-container">
+      <h2>Continue exploring</h2>
+      <p class="continue-subtitle">Same network, different entry point.</p>
+
+      <div class="continue-grid">
+
+        <a href="thread-money.html" class="continue-card continue-card-money">
+          <div class="continue-icon">$</div>
+          <h3>Follow the Money</h3>
+          <p>Iranian intelligence funds &rarr; Boesky &rarr; Drexel &rarr; Cr&eacute;dit Lyonnais &rarr; Apollo &rarr; Epstein</p>
+          <div class="thread-meta">
+            <span>~5 min</span>
+            <span class="thread-evidence">12 sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-lawyer.html" class="continue-card continue-card-lawyer">
+          <div class="continue-icon">&sect;</div>
+          <h3>Follow the Lawyer</h3>
+          <p>Sullivan &amp; Cromwell &rarr; Dulles Brothers &rarr; CIA &rarr; Donald Barr &rarr; Epstein &rarr; William Barr &rarr; SDNY</p>
+          <div class="thread-meta">
+            <span>~5 min</span>
+            <span class="thread-evidence">10 sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-spy.html" class="continue-card continue-card-spy">
+          <div class="continue-icon">&#9670;</div>
+          <h3>Follow the Spy</h3>
+          <p>Alex Brown &rarr; Krongard &rarr; CIA &rarr; Blackwater &rarr; Apollo &rarr; Deutsche Bank &rarr; Epstein</p>
+          <div class="thread-meta">
+            <span>~5 min</span>
+            <span class="thread-evidence">9 sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+      </div>
+
+      <div class="continue-dossier">
+        <a href="dossier.html" class="dossier-link">
+          <span class="dossier-label">Full Dossier</span>
+          <span class="dossier-desc">The complete evidence database &mdash; every person, every connection, every source.</span>
+          <span class="thread-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>An open-source investigative research project.</p>
+      <p class="footer-sources">Primary sources: DOJ Epstein file releases (Dec 2025, Jan 2026), SEC filings, FOIA documents, court records, congressional testimony, ProPublica, OpenSecrets, Jane Mayer, Catherine Belton, Henry Abbott/TrueHoop</p>
+      <div class="footer-links">
+        <a href="index.html">Narrative</a>
+        <a href="dossier.html">Full Dossier</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- THREAD PAGE JS — progress bar, nav, timeline reveal -->
+  <script>
+  (function () {
+    'use strict';
+
+    // Progress bar
+    var bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // Nav scroll state
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Timeline step reveal on scroll
+    var steps = document.querySelectorAll('.timeline-step');
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      rootMargin: '-10% 0px -10% 0px',
+      threshold: 0.15
+    });
+
+    steps.forEach(function (s) { observer.observe(s); });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          var y = target.getBoundingClientRect().top + window.scrollY - 60;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

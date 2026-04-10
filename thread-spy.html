@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow the Spy — Power Networks</title>
+  <meta name="description" content="Tracing the intelligence-finance pipeline: Alex Brown &amp; Sons to Buzzy Krongard to CIA Executive Director to Blackwater to Apollo Global to Deutsche Bank to Epstein.">
+  <meta property="og:title" content="Follow the Spy — Power Networks">
+  <meta property="og:description" content="The banker who took Microsoft public became the CIA's #3. His bank became Deutsche Bank's U.S. arm. Then he joined the board of Apollo Global. Coincidence?">
+  <meta property="og:type" content="article">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="narrative.css">
+  <style>
+    /* ============================================
+       THREAD-SPY — Vertical Timeline Overrides
+       Pure narrative scrollytelling, no SVG map
+       ============================================ */
+
+    .thread-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .thread-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 45%, rgba(248, 81, 73, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .thread-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .thread-hero-icon {
+      font-size: 3rem;
+      color: var(--red);
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-kicker {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-content h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .thread-hero-path {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .thread-hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* --- VERTICAL TIMELINE --- */
+
+    .timeline-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      position: relative;
+    }
+
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border-bright) 5%,
+        var(--border-bright) 95%,
+        transparent 100%
+      );
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 3.5rem;
+      padding-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .timeline-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-step:last-child {
+      padding-bottom: 0;
+    }
+
+    /* Timeline dot */
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: calc(2rem - 5px);
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--red);
+      z-index: 2;
+      transition: all 400ms ease;
+    }
+
+    .timeline-step.visible::before {
+      background: var(--red);
+      box-shadow: 0 0 12px rgba(248, 81, 73, 0.35);
+    }
+
+    .timeline-step-number {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 0.6rem;
+      opacity: 0.7;
+    }
+
+    .timeline-step h2 {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-step p {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.75;
+    }
+
+    .timeline-step p:last-of-type {
+      margin-bottom: 1rem;
+    }
+
+    .timeline-step .evidence-tag {
+      margin-top: 0.25rem;
+    }
+
+    /* Final step — "The Question" — special treatment */
+    .timeline-step-final {
+      padding-left: 3.5rem;
+    }
+
+    .timeline-step-final h2 {
+      color: var(--gold);
+    }
+
+    .timeline-step-final p {
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* Punchline separator */
+    .timeline-punchline {
+      position: relative;
+      padding-left: 3.5rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .timeline-punchline.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-punchline p {
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-punchline .punchline-sub {
+      color: var(--text-dim) !important;
+      font-weight: 400 !important;
+      font-style: italic;
+    }
+
+    /* --- SOURCES SECTION --- */
+
+    .sources-section {
+      padding: 4rem 2rem;
+      background: var(--bg-surface);
+    }
+
+    .sources-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .sources-container h2 {
+      font-family: var(--font-sans);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 1rem;
+    }
+
+    .sources-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sources-list li {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .sources-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* --- CONTINUE EXPLORING --- */
+
+    .continue-section {
+      padding: 6rem 2rem;
+    }
+
+    .continue-container {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .continue-container h2 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .continue-container > p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .continue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    /* --- RESPONSIVE --- */
+
+    @media (max-width: 600px) {
+      .timeline-section {
+        padding: 3rem 1.25rem 5rem;
+      }
+
+      .timeline-section::before {
+        left: 1.25rem;
+      }
+
+      .timeline-step {
+        padding-left: 2.75rem;
+        padding-bottom: 3rem;
+      }
+
+      .timeline-step::before {
+        left: calc(1.25rem - 5px);
+      }
+
+      .timeline-punchline {
+        padding-left: 2.75rem;
+      }
+
+      .thread-hero {
+        min-height: 70vh;
+      }
+
+      .continue-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- MINIMAL NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">POWER<span>NETWORKS</span></a>
+    <div class="nav-right">
+      <a href="index.html#threads" class="nav-link">All Threads</a>
+      <a href="dossier.html" class="nav-link nav-dossier">Full Dossier</a>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+
+  <section class="thread-hero">
+    <div class="thread-hero-content">
+      <div class="thread-hero-icon">&#9670;</div>
+      <p class="thread-hero-kicker">Thread: Follow the Spy</p>
+      <h1>The Intelligence-Finance Pipeline</h1>
+      <p class="thread-hero-path">Alex Brown &amp; Sons &rarr; Buzzy Krongard &rarr; CIA Executive Director &rarr; Blackwater &rarr; Apollo Global &rarr; Deutsche Bank &rarr; Epstein</p>
+      <p class="thread-hero-sub">One man connects the bank that took Microsoft public, the CIA's operational leadership, the private military contractor, the private equity firm paying Epstein, and the bank where Epstein kept his money.</p>
+      <div class="scroll-prompt">
+        <span>Scroll to begin</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VERTICAL TIMELINE
+       ============================================ -->
+
+  <section class="timeline-section" aria-label="Timeline of events">
+
+    <!-- STEP 1 -->
+    <div class="timeline-step" data-step="1">
+      <span class="timeline-step-number">01</span>
+      <h2>The IPO</h2>
+      <p>A.B. "Buzzy" Krongard is a banker at <strong>Alex Brown &amp; Sons</strong>, the oldest investment bank in the United States. He takes Microsoft public -- making Bill Gates, Steve Ballmer, and Paul Allen rich.</p>
+      <p>Another banker from the same era later said Krongard "tried to recruit me to the CIA" during the same period, suggesting Krongard was operating as CIA since his college years.</p>
+      <div class="evidence-tag reported">REPORTED -- Henry Abbott / TrueHoop investigation</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="timeline-step" data-step="2">
+      <span class="timeline-step-number">02</span>
+      <h2>The Bank Chain</h2>
+      <p>Alex Brown &amp; Sons is sold to <strong>Bankers Trust</strong>. Bankers Trust is then acquired by <strong>Deutsche Bank</strong>.</p>
+      <p>The Alex Brown division becomes Deutsche Bank's U.S. arm -- specifically the division where <strong>Jeffrey Epstein</strong> will later bank.</p>
+      <div class="evidence-tag documented">DOCUMENTED</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="timeline-step" data-step="3">
+      <span class="timeline-step-number">03</span>
+      <h2>The #3</h2>
+      <p>Krongard leaves banking and rises to become <strong>Executive Director of the CIA</strong> -- the #3 position in the agency.</p>
+      <p>He oversees the rendition program.</p>
+      <div class="evidence-tag documented">DOCUMENTED</div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="timeline-step" data-step="4">
+      <span class="timeline-step-number">04</span>
+      <h2>The Contractor</h2>
+      <p>Krongard gives the private military company <strong>Blackwater</strong> its government contracts. Blackwater puts him on its board.</p>
+      <p>When the Inspector General investigates this conflict of interest, the IG assigned is his own brother <strong>"Cookie" Krongard</strong>. Congress catches Cookie at a Blackwater board meeting while he is supposed to be independently investigating the company.</p>
+      <div class="evidence-tag documented">DOCUMENTED -- Congressional hearings</div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="timeline-step" data-step="5">
+      <span class="timeline-step-number">05</span>
+      <h2>The Board</h2>
+      <p>Krongard joins the board of <strong>Apollo Global Management</strong> -- sitting alongside Leon Black while Black is paying Epstein <strong>$170 million</strong>.</p>
+      <p>The former CIA Executive Director, the former banker whose firm became Deutsche Bank (where Epstein banked), now sits on the board of the company funneling money to Epstein.</p>
+      <div class="evidence-tag documented">DOCUMENTED -- Apollo Global SEC filings</div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="timeline-step" data-step="6">
+      <span class="timeline-step-number">06</span>
+      <h2>The Pattern</h2>
+      <p>The same man connects: the bank that took Microsoft public, the CIA's operational leadership, the private military contractor, the private equity firm paying Epstein, and the bank where Epstein kept his money.</p>
+      <p>At each step, the connections between intelligence and finance deepen.</p>
+      <div class="evidence-tag documented">DOCUMENTED</div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="timeline-step timeline-step-final" data-step="7">
+      <span class="timeline-step-number">07</span>
+      <h2>The Question</h2>
+      <p>If the banker who took Microsoft public was CIA since college, what does that mean about the IPO?</p>
+      <p>If his bank became the bank where Epstein held his accounts, is that coincidence?</p>
+      <p>If he sat on Apollo's board while $170M flowed to Epstein, was he watching -- or was he the system working as designed?</p>
+    </div>
+
+    <!-- PUNCHLINE -->
+    <div class="timeline-punchline">
+      <p>Alex Brown &amp; Sons &rarr; CIA Executive Director &rarr; Blackwater &rarr; Apollo Global &rarr; Deutsche Bank</p>
+      <p class="punchline-sub">One career path. Five institutions. The intelligence-finance pipeline, documented at every step.</p>
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       SOURCES
+       ============================================ -->
+
+  <section class="sources-section">
+    <div class="sources-container">
+      <h2>Sources</h2>
+      <ul class="sources-list">
+        <li>Congressional hearings -- Blackwater investigation and Inspector General conflict of interest</li>
+        <li>Inspector General reports -- Krongard / Blackwater board membership</li>
+        <li>Apollo Global Management SEC filings -- board composition and disclosures</li>
+        <li>Deutsche Bank records -- Epstein banking relationship through former Alex Brown division</li>
+        <li>DOJ Epstein file releases (Dec 2025, Jan 2026)</li>
+        <li>Henry Abbott / TrueHoop investigation -- Krongard CIA recruitment claims</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTINUE EXPLORING
+       ============================================ -->
+
+  <section class="continue-section">
+    <div class="continue-container">
+      <h2>Continue exploring</h2>
+      <p>Each thread follows one path through the evidence. Same network, different entry point.</p>
+
+      <div class="continue-grid">
+
+        <a href="thread-money.html" class="thread-card thread-money">
+          <div class="thread-icon">$</div>
+          <h3>Follow the Money</h3>
+          <p class="thread-path">Iranian intelligence &rarr; Boesky &rarr; Drexel &rarr; Cr&eacute;dit Lyonnais &rarr; Apollo &rarr; Epstein</p>
+          <div class="thread-meta">
+            <span>~5 min read</span>
+            <span class="thread-evidence">12 documented sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-lawyer.html" class="thread-card thread-lawyer">
+          <div class="thread-icon">&sect;</div>
+          <h3>Follow the Lawyer</h3>
+          <p class="thread-path">Sullivan &amp; Cromwell &rarr; Dulles Brothers &rarr; CIA &rarr; Barr &rarr; Clayton &rarr; SDNY</p>
+          <div class="thread-meta">
+            <span>~5 min read</span>
+            <span class="thread-evidence">10 documented sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+        <a href="thread-institution.html" class="thread-card thread-institution">
+          <div class="thread-icon">&#9960;</div>
+          <h3>Follow the Institution</h3>
+          <p class="thread-path">Rockefeller &rarr; CFR &rarr; Trilateral Commission &rarr; Epstein &rarr; Koch &rarr; Federalist Society</p>
+          <div class="thread-meta">
+            <span>~5 min read</span>
+            <span class="thread-evidence">14 documented sources</span>
+          </div>
+          <div class="thread-arrow">&rarr;</div>
+        </a>
+
+      </div>
+
+      <div class="threads-footer">
+        <a href="dossier.html" class="dossier-link">
+          <span class="dossier-label">Full Dossier</span>
+          <span class="dossier-desc">The complete evidence database -- every person, every connection, every source.</span>
+          <span class="thread-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>An open-source investigative research project.</p>
+      <p class="footer-sources">Primary sources: DOJ Epstein file releases (Dec 2025, Jan 2026), SEC filings, Congressional hearings, Inspector General reports, Henry Abbott/TrueHoop</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="dossier.html">Full Dossier</a>
+        <a href="index.html#threads">All Threads</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // -- Progress bar --
+      var bar = document.getElementById('progress-bar');
+      window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = pct + '%';
+      }, { passive: true });
+
+      // -- Nav scroll state --
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      // -- Scroll-reveal for timeline steps --
+      var steps = document.querySelectorAll('.timeline-step, .timeline-punchline');
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -15% 0px',
+        threshold: 0.15
+      });
+
+      steps.forEach(function (s) { observer.observe(s); });
+
+      // -- Smooth scroll for anchor links --
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            var offset = 60;
+            var y = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
