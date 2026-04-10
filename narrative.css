@@ -10,7 +10,7 @@
 
 :root {
   --bg: #06080d;
-  --bg-card: #0d1117;
+  --bg-card: #161e2d;
   --bg-card-active: #141c2b;
   --bg-surface: #0f1520;
   --text: #c9d1d9;
@@ -229,12 +229,12 @@ em { color: var(--text); }
 }
 
 .step-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: #1a2332;
+  border: 1px solid rgba(240, 246, 252, 0.12);
   border-left: 3px solid var(--gold);
   border-radius: 0 12px 12px 0;
   padding: 2rem 2.25rem;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
 .step-number {
