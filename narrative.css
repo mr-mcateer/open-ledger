@@ -205,14 +205,14 @@ em { color: var(--text); }
 }
 
 /* ============================================
-   SCROLLYTELLING ENGINE
+   SCROLLYTELLING ENGINE — Proven layout
    ============================================ */
 
 .scrolly-section {
   position: relative;
 }
 
-/* Sticky network map */
+/* Sticky network map — stays fixed in background */
 .sticky-map {
   position: sticky;
   top: 52px;
@@ -224,6 +224,8 @@ em { color: var(--text); }
   justify-content: center;
   background: var(--bg);
   overflow: hidden;
+  /* Negative margin-bottom: map doesn't push content down */
+  margin-bottom: calc(-100vh + 52px);
 }
 
 .sticky-map::after {
@@ -244,16 +246,15 @@ em { color: var(--text); }
   z-index: 1;
 }
 
-/* Scroll steps — overlaid on right side */
+/* Scroll steps — flow naturally, overlaid via z-index */
 .scroll-steps {
   position: relative;
   z-index: 10;
-  margin-top: calc(-100vh + 52px); /* Pull up to overlap with sticky */
   pointer-events: none;
 }
 
 .step {
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -261,25 +262,29 @@ em { color: var(--text); }
   padding-right: 4rem;
 }
 
+.step:first-child {
+  padding-top: 15vh;
+}
+
 .step-card {
   pointer-events: auto;
   max-width: 420px;
-  background: rgba(13, 17, 23, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+  background: rgba(10, 14, 23, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(240, 246, 252, 0.12);
   border-radius: 14px;
   padding: 2.25rem;
-  opacity: 0.15;
-  transform: translateY(20px);
-  transition: all 500ms ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 600ms ease, transform 600ms ease, border-color 400ms ease, box-shadow 400ms ease;
 }
 
 .step.active .step-card {
   opacity: 1;
   transform: translateY(0);
-  border-color: var(--border-bright);
-  box-shadow: 0 0 60px rgba(240, 165, 0, 0.05);
+  border-color: rgba(240, 246, 252, 0.2);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(240, 165, 0, 0.04);
 }
 
 .step-number {
