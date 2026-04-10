@@ -205,88 +205,45 @@ em { color: var(--text); }
 }
 
 /* ============================================
-   SCROLLYTELLING ENGINE — Proven layout
+   NARRATIVE STEPS — Simple linear layout
    ============================================ */
 
 .scrolly-section {
-  position: relative;
+  padding: 2rem 0 4rem;
 }
 
-/* Sticky network map — stays fixed in background */
+/* Hide the SVG map — use simple linear steps instead */
 .sticky-map {
-  position: sticky;
-  top: 52px;
-  height: calc(100vh - 52px);
-  width: 100%;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg);
-  overflow: hidden;
-  /* Negative margin-bottom: map doesn't push content down */
-  margin-bottom: calc(-100vh + 52px);
+  display: none;
 }
 
-.sticky-map::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-}
-
-#story-network {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-/* Scroll steps — flow naturally, overlaid via z-index */
+/* Steps container */
 .scroll-steps {
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 .step {
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 2rem;
-  padding-right: max(2rem, calc((100vw - 900px) / 2));
-  max-width: 100vw;
-}
-
-.step:first-child {
-  padding-top: 15vh;
+  margin-bottom: 1.5rem;
 }
 
 .step-card {
-  pointer-events: auto;
-  max-width: 400px;
-  width: 100%;
-  background: rgba(22, 30, 44, 0.97);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(240, 246, 252, 0.15);
-  border-radius: 14px;
-  padding: 2.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  padding: 2rem 2.25rem;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 600ms ease, transform 600ms ease, border-color 400ms ease, box-shadow 400ms ease;
+  transform: translateY(20px);
+  transition: opacity 500ms ease, transform 500ms ease, border-color 300ms ease, box-shadow 300ms ease;
 }
 
-.step.active .step-card {
+.step.active .step-card,
+.step-card.visible {
   opacity: 1;
   transform: translateY(0);
-  border-color: rgba(240, 165, 0, 0.3);
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6), 0 0 80px rgba(240, 165, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .step-number {
@@ -1034,6 +991,17 @@ footer p {
   border-radius: 14px;
   padding: 2rem;
   transition: all 300ms ease;
+}
+
+.matters-card {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 500ms ease;
+}
+
+.matters-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .matters-card:hover {
