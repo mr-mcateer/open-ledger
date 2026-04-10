@@ -849,6 +849,146 @@ footer p {
   .nav-dossier { display: none; }
 }
 
+/* ============================================
+   HERO ANSWER
+   ============================================ */
+
+.hero-answer {
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.8;
+}
+
+.hero-answer strong {
+  color: var(--gold);
+}
+
+/* ============================================
+   SOURCE LINKS
+   ============================================ */
+
+.source-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--blue);
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+  transition: opacity 150ms ease;
+  letter-spacing: 0.01em;
+}
+
+.source-link:hover {
+  opacity: 1;
+  color: #79c0ff;
+}
+
+/* ============================================
+   ANALOGIES
+   ============================================ */
+
+.analogy {
+  font-style: italic;
+  color: var(--gold) !important;
+  font-size: 0.88rem !important;
+  border-left: 2px solid var(--gold);
+  padding-left: 0.75rem;
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+/* ============================================
+   WHY IT MATTERS
+   ============================================ */
+
+.matters-section {
+  padding: 7rem 2rem;
+  background: var(--bg-surface);
+}
+
+.matters-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.matters-section h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 900;
+  color: var(--text-bright);
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.matters-intro {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  margin-bottom: 3.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.matters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.matters-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+  transition: all 300ms ease;
+}
+
+.matters-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-2px);
+}
+
+.matters-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.matters-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 0.6rem;
+}
+
+.matters-card p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.matters-card .source-link {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.matters-card .evidence-tag {
+  font-size: 0.55rem;
+}
+
+@media (max-width: 700px) {
+  .matters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Print */
 @media print {
   body { background: white; color: #111; }
