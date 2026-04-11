@@ -767,7 +767,7 @@ footer p {
   }
 
   .step-card {
-    max-width: 380px;
+    max-width: 540px;
   }
 
   .evidence-tiers {
@@ -788,7 +788,6 @@ footer p {
   .step-card {
     max-width: 100%;
     padding: 1.5rem;
-    background: rgba(13, 17, 23, 0.96);
   }
 
   .step-card h2 { font-size: 1.15rem; }
