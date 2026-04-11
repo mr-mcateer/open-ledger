@@ -140,7 +140,7 @@ em { color: var(--text); }
 
 #hero {
   text-align: center;
-  padding: 2rem;
+  padding: 5rem 2rem 2rem;
 }
 
 #hero::before {
